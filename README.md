@@ -61,6 +61,7 @@ View all customer orders
 Update order status (Placed, Shipped, Delivered, Cancelled)
 
 🧩 Functional Modules
+
 1️⃣ Authentication Module
 
 User login
@@ -172,7 +173,9 @@ Used after logout or critical actions
 Prevents form resubmission
 
 🗄 Database Design
-Database: MySQL
+java database connectivity 
+
+
 Tables Used
 
 
