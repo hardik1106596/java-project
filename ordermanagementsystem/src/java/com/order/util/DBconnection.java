@@ -6,40 +6,41 @@ import java.sql.SQLException;
 
 public class DBconnection {
     
-    // ⚙️ CONFIGURATION - CHANGE THESE IF NEEDED
     private static final String URL = "jdbc:mysql://localhost:3306/orderdb";
     private static final String USER = "root";
-    private static final String PASSWORD = "1234"; // ⚠️ CHANGE THIS to your MySQL password
+    private static final String PASSWORD = "1234"; // Change to YOUR MySQL password
     
-    // Load MySQL Driver
     static {
         try {
+            System.out.println("Loading MySQL Driver...");
             Class.forName("com.mysql.cj.jdbc.Driver");
-            System.out.println("✅ MySQL Driver Loaded Successfully");
+            System.out.println("✅ MySQL Driver Loaded Successfully!");
         } catch (ClassNotFoundException e) {
-            System.out.println("❌ MySQL Driver Not Found! Add MySQL Connector JAR to Libraries.");
+            System.out.println("❌ MySQL Driver NOT Found!");
+            System.out.println("ERROR: " + e.getMessage());
+            System.out.println("SOLUTION: Add mysql-connector-j-8.x.x.jar to Libraries!");
         }
     }
     
-    // Method to get Connection
     public static Connection getConnect() {
         try {
+            System.out.println("Trying to connect to: " + URL);
             Connection con = DriverManager.getConnection(URL, USER, PASSWORD);
-            System.out.println("✅ Database Connected: " + URL);
+            System.out.println("✅ Database Connected Successfully!");
             return con;
         } catch (SQLException e) {
             System.out.println("❌ Database Connection Failed!");
-            System.out.println("Error: " + e.getMessage());
+            System.out.println("ERROR: " + e.getMessage());
+            System.out.println("Check: 1) MySQL is running  2) Password is correct  3) Database exists");
             return null;
         }
     }
     
-    // Method to close Connection
     public static void closeConnection(Connection con) {
         try {
             if (con != null && !con.isClosed()) {
                 con.close();
-                System.out.println("🔒 Database Connection Closed");
+                System.out.println("Database connection closed");
             }
         } catch (SQLException e) {
         }
