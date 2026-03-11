@@ -1,4 +1,11 @@
+<meta charset="UTF-8">
+
+
 <%@ page import="java.util.*, com.order.bean.*, com.order.dao.*" %>
+
+
+
+
 <%
     if (session.getAttribute("user") == null) { 
         response.sendRedirect("login.jsp"); 
@@ -38,6 +45,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Preconnect for faster font loading -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<!-- Meta for better mobile experience -->
+<meta name="theme-color" content="#667eea">
+<meta name="apple-mobile-web-app-capable" content="yes">
     <title>Admin Dashboard - Order Management System</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
@@ -45,36 +59,40 @@
 </head>
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container">
-            <a class="navbar-brand" href="adminDashboard.jsp">
-                <i class="fas fa-user-shield me-2"></i>Admin Panel
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <span class="nav-link">
-                            <i class="fas fa-user me-2"></i><%= user.getName() %>
-                        </span>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.jsp">
-                            <i class="fas fa-store me-2"></i>View Site
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="logout">
-                            <i class="fas fa-sign-out-alt me-2"></i>Logout
-                        </a>
-                    </li>
-                </ul>
-            </div>
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+        <a class="navbar-brand" href="adminDashboard.jsp">
+            <i class="fas fa-user-shield me-2"></i>Admin Panel
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="adminDashboard.jsp">
+                        <i class="fas fa-tachometer-alt me-2"></i>Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <span class="nav-link">
+                        <i class="fas fa-user me-2"></i><%= user.getName() %>
+                    </span>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.jsp">
+                        <i class="fas fa-store me-2"></i>View Site
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="logout">
+                        <i class="fas fa-sign-out-alt me-2"></i>Logout
+                    </a>
+                </li>
+            </ul>
         </div>
-    </nav>
-
+    </div>
+</nav>
     <div class="main-container">
         <div class="page-header">
             <h1><i class="fas fa-tachometer-alt me-3"></i>Admin Dashboard</h1>
@@ -133,7 +151,7 @@
                         <textarea class="form-control" name="pdesc" rows="2" required></textarea>
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label">Price (?)</label>
+                        <label class="form-label">Price ($)</label>
                         <input type="number" class="form-control" name="pprice" step="0.01" required>
                     </div>
                     <div class="col-md-4">
@@ -170,7 +188,7 @@
                                 <td><%= p.getProductId() %></td>
                                 <td><strong><%= p.getProductName() %></strong></td>
                                 <td><%= p.getCategory() %></td>
-                                <td>?<%= String.format("%.2f", p.getPrice()) %></td>
+                                <td>$<%= String.format("%.2f", p.getPrice()) %></td>
                                 <td>
                                     <% if (p.getQuantity() > 10) { %>
                                         <span class="badge bg-success"><%= p.getQuantity() %></span>
@@ -244,7 +262,7 @@
                                 <td><strong>#<%= o.getOrderId() %></strong></td>
                                 <td><%= o.getUserId() %></td>
                                 <td><%= o.getOrderDate() %></td>
-                                <td>?<%= String.format("%.2f", o.getTotalAmount()) %></td>
+                                <td>$<%= String.format("%.2f", o.getTotalAmount()) %></td>
                                 <td>
                                     <span class="badge status-<%= o.getStatus().toLowerCase() %>">
                                         <%= o.getStatus() %>
